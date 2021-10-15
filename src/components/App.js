@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import '../css/app.css';
 import AddTodo from './AddTodo';
 import TodoList from './TodoList';
@@ -10,8 +10,35 @@ function importAll(r) {
 }
 importAll(require.context('../images', false, /\.svg$/));
 
+export const TodoContext = React.createContext();
+
 function App() {
   const [todos, setTodos] = useState(SAMPLE_DATA);
+
+  const contextValue = {
+    handleUpdateTodo,
+    handleDeleteTodo,
+    handleClearCompleted,
+  };
+
+  function handleAddTodo(todo) {
+    setTodos([todo, ...todos]);
+  }
+
+  function handleDeleteTodo(id) {
+    setTodos(todos.filter(todo => todo.id !== id));
+  }
+
+  function handleUpdateTodo(todo) {
+    const newTodos = [...todos];
+    const index = newTodos.findIndex(t => t.id === todo.id);
+    newTodos[index] = todo;
+    setTodos(newTodos);
+  }
+
+  function handleClearCompleted() {
+    setTodos(todos.filter(todo => !todo.completed));
+  }
 
   return (
     <div className='container'>
@@ -22,10 +49,12 @@ function App() {
             <img src={icons['icon-sun.svg']} alt='Theme Toggler' />
           </div>
         </div>
-        <AddTodo />
+        <AddTodo handleAddTodo={handleAddTodo} />
       </header>
       <main className='main'>
-        <TodoList todos={todos} />
+        <TodoContext.Provider value={contextValue}>
+          <TodoList todos={todos} />
+        </TodoContext.Provider>
       </main>
       <footer className='footer'>
         <p>Drag and drop to reorder list</p>
