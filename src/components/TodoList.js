@@ -1,21 +1,60 @@
+import { useState, useContext } from 'react';
+import { TodoContext } from './App';
 import TodoItem from './TodoItem';
 
 const TodoList = ({ todos }) => {
+  const [currentFilter, setCurrentFilter] = useState('all');
+  const { handleClearCompleted } = useContext(TodoContext);
+
+  const filteredTodos = {
+    all: todos,
+    active: todos.filter(todo => !todo.completed),
+    completed: todos.filter(todo => todo.completed),
+  };
+
+  const countActive = filteredTodos.active.length;
+
+  function filterClass(key) {
+    if (key !== currentFilter) return '';
+    return 'active-filter';
+  }
+
+  function handleClear() {
+    handleClearCompleted();
+    setCurrentFilter('all');
+  }
+
   return (
     <>
       <div className='todo-list-container'>
-        {todos.map(todo => (
+        {filteredTodos[currentFilter].map(todo => (
           <TodoItem key={todo.id} todo={todo} />
         ))}
       </div>
       <div className='todo-options'>
-        <p className='todo-info'>5 items left</p>
+        <p className='todo-info'>
+          {countActive} item{countActive > 1 ? 's' : ''} left
+        </p>
         <div className='filter-todos'>
-          <p>All</p>
-          <p>Active</p>
-          <p>Completed</p>
+          <p
+            className={filterClass('all')}
+            onClick={() => setCurrentFilter('all')}>
+            All
+          </p>
+          <p
+            className={filterClass('active')}
+            onClick={() => setCurrentFilter('active')}>
+            Active
+          </p>
+          <p
+            className={filterClass('completed')}
+            onClick={() => setCurrentFilter('completed')}>
+            Completed
+          </p>
         </div>
-        <p className='clear-complete'>Clear Completed</p>
+        <p className='clear-complete' onClick={handleClear}>
+          Clear Completed
+        </p>
       </div>
     </>
   );
