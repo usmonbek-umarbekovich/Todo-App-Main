@@ -1,11 +1,33 @@
-const AddTodo = () => {
+import { useState } from 'react';
+import { v4 as uuidv4 } from 'uuid';
+
+const AddTodo = ({ handleAddTodo }) => {
+  const [todoTask, setTodoTask] = useState('');
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    if (!todoTask) return;
+
+    const newTodo = {
+      id: uuidv4(),
+      task: todoTask,
+      completed: false,
+    };
+    handleAddTodo(newTodo);
+    setTodoTask('');
+  }
+
   return (
-    <form className='todo-form'>
+    <form className='todo-form' onSubmit={handleSubmit}>
       <div className='todo-complete'>
         <div className='input-wrapper'></div>
-        <input type='checkbox' />
       </div>
-      <input type='text' placeholder='Create a new todo...' />
+      <input
+        type='text'
+        placeholder='Create a new todo...'
+        value={todoTask}
+        onChange={e => setTodoTask(e.target.value)}
+      />
     </form>
   );
 };
