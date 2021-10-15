@@ -1,0 +1,94 @@
+.main {
+  background-color: hsl(235, 24%, 19%);
+  min-height: 10rem;
+  border-radius: 5px;
+}
+
+.todo-list-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  height: 24.5rem;
+  overflow-y: auto;
+}
+
+.todo-list-container::-webkit-scrollbar {
+  width: 7px;
+  background-color:hsl(234, 39%, 85%);
+  border-radius: 10px;
+}
+
+.todo-list-container::-webkit-scrollbar-thumb {
+  background-color: hsl(234, 11%, 52%);
+  border-radius: 10px;
+}
+
+.todo-list-container .todo-item {
+  display: flex;
+  align-items: center;
+  padding: 1.2rem;
+  border-bottom: 1px solid hsl(233, 14%, 35%);
+  width: 100%;
+}
+
+.todo-item .todo-complete:hover {
+  background: var(--check-background);
+}
+
+.todo-item .todo-complete input {
+  cursor: pointer;
+}
+
+.todo-item .todo-content-wrapper {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+}
+
+.todo-item .todo-content-wrapper:hover .remove-todo {
+  opacity: 1;
+}
+
+.todo-content-wrapper .remove-todo {
+  opacity: 0;
+  transition: 0.3s ease-in;
+}
+
+.todo-content-wrapper .todo-content {
+  color: hsl(234, 39%, 85%);
+  font-size: 1.2rem;
+}
+
+.todo-options {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: hsl(234, 11%, 52%);
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+}
+
+.todo-options .todo-info {
+  font-size: 0.75rem;
+}
+
+.todo-options .filter-todos {
+  display: flex;
+}
+
+.todo-options p:not(.todo-info) {
+  cursor: pointer;
+  transition: 0.3s ease-in-out;
+}
+
+.filter-todos p:not(:last-child) {
+  margin-right: 1rem;
+}
+
+.todo-options .clear-complete:hover {
+  color: hsl(234, 39%, 85%);
+}
