@@ -14,8 +14,12 @@ export const TodoContext = React.createContext();
 
 function App() {
   const [todos, setTodos] = useState(SAMPLE_DATA);
+  const [theme, setTheme] = useState('dark');
+
+  const themeIcon = theme === 'dark' ? 'sun' : 'moon';
 
   const contextValue = {
+    theme,
     handleUpdateTodo,
     handleDeleteTodo,
     handleClearCompleted,
@@ -40,13 +44,20 @@ function App() {
     setTodos(todos.filter(todo => !todo.completed));
   }
 
+  function changeTheme() {
+    const newTheme = theme === 'dark' ? 'light' : 'dark';
+    document.body.classList.remove(theme);
+    document.body.classList.add(newTheme);
+    setTheme(newTheme);
+  }
+
   return (
     <div className='container'>
       <header className='header'>
         <div className='header__title'>
           <h1>Todo</h1>
-          <div className='toggle-theme'>
-            <img src={icons['icon-sun.svg']} alt='Theme Toggler' />
+          <div className='toggle-theme' onClick={changeTheme}>
+            <img src={icons[`icon-${themeIcon}.svg`]} alt='Theme Toggler' />
           </div>
         </div>
         <AddTodo handleAddTodo={handleAddTodo} />

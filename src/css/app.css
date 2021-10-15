@@ -9,8 +9,6 @@
 }
 
 body {
-  background: url('../images/bg-desktop-dark.jpg') no-repeat left top;
-  background-color: hsl(235, 21%, 11%);
   font-family: 'Josefin Sans', sans-serif;
   font-size: 18px;
   font-weight: 400;
@@ -32,10 +30,13 @@ h1 {
   padding: 2rem 1rem;
 }
 
+.toggle-theme {
+  cursor: pointer;
+}
+
 .todo-complete {
   width: 25px;
   height: 25px;
-  background: hsl(237, 14%, 26%);
   border-radius: 100%;
   margin-right: 1rem;
   position: relative;
@@ -49,7 +50,6 @@ h1 {
   bottom: 1px;
   width: 23px;
   height: 23px;
-  background: hsl(235, 24%, 19%);
   border-radius: 100%;
 
   display: flex;
@@ -84,7 +84,6 @@ h1 {
 .header .todo-form {
   display: flex;
   align-items: center;
-  background-color: hsl(235, 24%, 19%);
   border-radius: 5px;
   padding: 1.2rem;
   margin: 0.5rem 0;
@@ -96,15 +95,65 @@ h1 {
   font-size: 1.2rem;
   outline: none;
   border: none;
-  background-color: hsl(235, 24%, 19%);
-  color: hsl(234, 39%, 85%);
 }
 
 .footer {
   display: flex;
   justify-content: center;
   margin-top: 2rem;
-  color: hsl(233, 14%, 35%);
   font-size: 1rem;
   font-weight: 700;
+}
+
+/* Themes */
+body.dark {
+  background: url('../images/bg-desktop-dark.jpg') no-repeat left top;
+  background-color: hsl(235, 21%, 11%);
+}
+
+body.light {
+  background: url('../images/bg-desktop-light.jpg') no-repeat left top;
+  background-color: hsl(236, 33%, 92%);
+}
+
+body.dark .todo-complete {
+  background-color: hsl(237, 14%, 26%);
+}
+
+body.light .todo-complete {
+  background-color: hsl(233, 11%, 84%);
+}
+
+body.dark .todo-complete .input-wrapper {
+  background-color: hsl(235, 24%, 19%);
+}
+
+body.light .todo-complete .input-wrapper {
+  background-color: hsl(0, 0%, 98%);
+}
+
+body.dark .header .todo-form {
+  background-color: hsl(235, 24%, 19%);
+}
+
+body.light .header .todo-form {
+  background-color: hsl(0, 0%, 98%);
+}
+
+body.dark .todo-form input {
+  background-color: hsl(235, 24%, 19%);
+  color: hsl(234, 39%, 85%);
+}
+
+body.light .todo-form input {
+  background-color: hsl(0, 0%, 98%);
+  color: hsl(235, 19%, 35%);
+}
+
+body.dark .footer {
+  color: hsl(233, 14%, 35%);
+}
+
+body.light .footer {
+  color: hsl(236, 9%, 61%);
 }
