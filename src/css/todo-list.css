@@ -14,7 +14,7 @@
 
 .todo-list-container::-webkit-scrollbar {
   width: 7px;
-  background-color:hsl(234, 39%, 85%);
+  background-color: hsl(234, 39%, 85%);
   border-radius: 10px;
 }
 
@@ -89,6 +89,11 @@
   margin-right: 1rem;
 }
 
-.todo-options .clear-complete:hover {
+.filter-todos p.active-filter {
+  color: var(--primary-blue);
+}
+
+.todo-options .clear-complete:hover,
+.filter-todos p:not(.active-filter):hover {
   color: hsl(234, 39%, 85%);
 }
