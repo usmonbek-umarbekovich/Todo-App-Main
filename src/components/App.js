@@ -20,6 +20,7 @@ function App() {
 
   const contextValue = {
     theme,
+    swapItems,
     handleUpdateTodo,
     handleDeleteTodo,
     handleClearCompleted,
@@ -49,6 +50,16 @@ function App() {
     document.body.classList.remove(theme);
     document.body.classList.add(newTheme);
     setTheme(newTheme);
+  }
+
+  function swapItems(pos1, pos2) {
+    setTodos(prevTodos => {
+      const newTodos = [...prevTodos];
+      const sibling = newTodos[pos1];
+      newTodos[pos1] = newTodos[pos2];
+      newTodos[pos2] = sibling;
+      return newTodos;
+    });
   }
 
   return (
