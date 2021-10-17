@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import '../css/app.css';
 import AddTodo from './AddTodo';
 import TodoList from './TodoList';
@@ -25,6 +25,15 @@ function App() {
     handleDeleteTodo,
     handleClearCompleted,
   };
+
+  useEffect(() => {
+    const storedTodos = localStorage.getItem('todos');
+    setTodos(JSON.parse(storedTodos));
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem('todos', JSON.stringify(todos));
+  }, [todos]);
 
   function handleAddTodo(todo) {
     setTodos([todo, ...todos]);
