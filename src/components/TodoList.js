@@ -27,8 +27,8 @@ const TodoList = ({ todos }) => {
   return (
     <>
       <div className='todo-list-container'>
-        {filteredTodos[currentFilter].map(todo => (
-          <TodoItem key={todo.id} todo={todo} />
+        {filteredTodos[currentFilter].map((todo, index) => (
+          <TodoItem key={todo.id} index={index} todo={todo} />
         ))}
       </div>
       <div className='todo-options'>
