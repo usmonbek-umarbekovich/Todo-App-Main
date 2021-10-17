@@ -112,3 +112,103 @@ h1 {
   font-weight: 700;
   color: var(--footer-color);
 }
+
+/* Media Queries */
+@media (max-width: 425px) {
+  .main {
+    background: none;
+    box-shadow: none;
+    border-radius: 5px 5px 0 0;
+  }
+
+  .todo-list-container {
+    background-color: var(--main-background);
+  }
+
+  .todo-options {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    grid-row-gap: 1rem;
+    place-items: center;
+    padding: 0;
+  }
+
+  .todo-options .todo-info,
+  .todo-options .clear-complete {
+    width: 100%;
+    padding: 1.2rem;
+    font-size: 1rem;
+    background-color: var(--main-background);
+    color: var(--footer-color);
+  }
+
+  .todo-options .clear-complete {
+    text-align: end;
+  }
+
+  .todo-options .filter-todos {
+    grid-row: 2;
+    grid-column: 1 / span 2;
+    width: 100%;
+    padding: 1.2rem;
+    font-size: 1rem;
+    justify-content: center;
+    border-radius: 5px;
+    background-color: var(--main-background);
+  }
+}
+
+@media (max-width: 375px) {
+  body.dark {
+    --body-image: url('../images/bg-mobile-dark.jpg');
+  }
+
+  body.light {
+    --body-image: url('../images/bg-mobile-light.jpg');
+  }
+
+  h1 {
+    font-size: 2rem;
+    line-height: 1;
+  }
+
+  .container {
+    padding: 1.5rem;
+  }
+
+  .header {
+    padding-top: 0;
+    padding-bottom: 0.5rem;
+  }
+
+  .header .todo-form,
+  .todo-options .filter-todos {
+    padding: 0.85rem 1.2rem;
+  }
+
+  .todo-options .todo-info {
+    padding-right: 0;
+  }
+
+  .todo-options .clear-complete {
+    padding-left: 0;
+  }
+
+  .todo-form input,
+  .todo-item .todo-content {
+    font-size: 1rem;
+  }
+
+  .todo-item > * {
+    padding: 0.85rem 0;
+  }
+
+  .todo-list-container {
+    height: 20rem;
+  }
+
+  .todo-options .todo-info,
+  .todo-options .clear-complete {
+    font-size: 0.85rem;
+  }
+}
