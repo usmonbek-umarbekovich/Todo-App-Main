@@ -8,8 +8,8 @@ const TodoList = ({ todos }) => {
 
   const filteredTodos = {
     all: todos,
-    active: todos.filter(todo => !todo.completed),
-    completed: todos.filter(todo => todo.completed),
+    active: todos?.filter(todo => !todo.completed) ?? todos,
+    completed: todos?.filter(todo => todo.completed) ?? todos,
   };
 
   const countActive = filteredTodos.active.length;
