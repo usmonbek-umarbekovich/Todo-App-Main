@@ -20,7 +20,7 @@ function App() {
 
   const contextValue = {
     theme,
-    swapItems,
+    saveOrder,
     handleUpdateTodo,
     handleDeleteTodo,
     handleClearCompleted,
@@ -52,14 +52,12 @@ function App() {
     setTheme(newTheme);
   }
 
-  function swapItems(pos1, pos2) {
-    setTodos(prevTodos => {
-      const newTodos = [...prevTodos];
-      const sibling = newTodos[pos1];
-      newTodos[pos1] = newTodos[pos2];
-      newTodos[pos2] = sibling;
-      return newTodos;
-    });
+  function saveOrder(todo, index) {
+    const newTodos = [...todos];
+    const prevIndex = newTodos.findIndex(t => t.id === todo.id);
+    newTodos[prevIndex] = newTodos[index];
+    newTodos[index] = todo;
+    setTodos(newTodos);
   }
 
   return (
