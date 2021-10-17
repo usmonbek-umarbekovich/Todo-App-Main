@@ -8,11 +8,11 @@ const TodoList = ({ todos }) => {
 
   const filteredTodos = {
     all: todos,
-    active: todos?.filter(todo => !todo.completed) ?? todos,
-    completed: todos?.filter(todo => todo.completed) ?? todos,
+    active: todos.filter(todo => !todo.completed),
+    completed: todos.filter(todo => todo.completed),
   };
 
-  const countActive = filteredTodos.active?.length;
+  const countActive = filteredTodos.active.length;
 
   function filterClass(key) {
     if (key !== currentFilter) return '';
@@ -27,7 +27,7 @@ const TodoList = ({ todos }) => {
   return (
     <>
       <div className='todo-list-container'>
-        {filteredTodos[currentFilter].map((todo, index) => (
+        {filteredTodos[currentFilter]?.map((todo, index) => (
           <TodoItem key={todo.id} index={index} todo={todo} />
         ))}
       </div>
