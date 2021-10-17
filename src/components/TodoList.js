@@ -12,7 +12,7 @@ const TodoList = ({ todos }) => {
     completed: todos?.filter(todo => todo.completed) ?? todos,
   };
 
-  const countActive = filteredTodos.active.length;
+  const countActive = filteredTodos.active?.length;
 
   function filterClass(key) {
     if (key !== currentFilter) return '';
