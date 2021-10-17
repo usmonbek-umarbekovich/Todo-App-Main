@@ -61,12 +61,14 @@
   cursor: pointer;
 }
 
-.todo-item .todo-content:hover + .remove-todo {
+.todo-item .todo-content:hover + .remove-todo,
+.todo-item .remove-todo:hover {
   opacity: 1;
 }
 
 .todo-item .remove-todo {
   opacity: 0;
+  cursor: pointer;
   margin-left: auto;
   transition: 0.3s ease-in;
 }
