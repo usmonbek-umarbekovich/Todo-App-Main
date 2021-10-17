@@ -53,10 +53,8 @@ function App() {
   }
 
   function saveOrder(todo, index) {
-    const newTodos = [...todos];
-    const prevIndex = newTodos.findIndex(t => t.id === todo.id);
-    newTodos[prevIndex] = newTodos[index];
-    newTodos[index] = todo;
+    const newTodos = todos.filter(t => t.id !== todo.id);
+    newTodos.splice(index, 0, todo);
     setTodos(newTodos);
   }
 
