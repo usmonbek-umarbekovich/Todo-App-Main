@@ -6,3 +6,26 @@
     hsl(280, 87%, 65%)
   );
 }
+
+/* Theme Variables */
+/* Dark Theme */
+body.dark {
+  --body-background: hsl(235, 21%, 11%);
+  --body-image: url('../images/bg-desktop-dark.jpg');
+  --main-background: hsl(235, 24%, 19%);
+  --circle-color: hsl(237, 14%, 26%);
+  --main-text-color: hsl(234, 39%, 85%);
+  --secondary-color: hsl(234, 11%, 52%);
+  --footer-color: hsl(233, 14%, 35%);
+}
+
+/* Light Theme */
+body.light {
+  --body-background: hsl(236, 33%, 92%);
+  --body-image: url('../images/bg-desktop-light.jpg');
+  --main-background: hsl(0, 0%, 98%);
+  --circle-color: hsl(233, 11%, 84%);
+  --main-text-color: hsl(235, 19%, 35%);
+  --secondary-color: hsl(236, 9%, 61%);
+  --footer-color: hsl(236, 9%, 61%);
+}
