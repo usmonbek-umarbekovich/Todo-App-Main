@@ -3,14 +3,14 @@ import { TodoContext } from './App';
 import check from '../images/icon-check.svg';
 import cross from '../images/icon-cross.svg';
 
-const TodoItem = ({ todo }) => {
+const TodoItem = ({ todo, index }) => {
   const [dragging, setDragging] = useState(false);
-  const { theme, swapItems, handleUpdateTodo, handleDeleteTodo } =
+  const { theme, saveOrder, handleUpdateTodo, handleDeleteTodo } =
     useContext(TodoContext);
   const todoEl = useRef();
   const placeholderEl = useRef();
 
-  let yOffset, topValue, todoHeight;
+  let yOffset, topValue, prevTopValue, todoHeight;
   let todoElements, currIndex;
 
   const taskStyle = {
@@ -33,15 +33,16 @@ const TodoItem = ({ todo }) => {
   }
 
   function handleDragStart(e) {
-    const wrapper = e.target.closest('.todo-content-wrapper');
+    const wrapper = e.target.closest('.todo-content');
     if (!wrapper) return;
 
     todoElements = [...document.querySelectorAll('.todo-item')];
     currIndex = todoElements.findIndex(t => t === todoEl.current);
-
+    const rect = todoEl.current.getBoundingClientRect();
+    topValue = rect.top + window.scrollY;
+    prevTopValue = topValue;
+    todoHeight = rect.height;
     yOffset = e.clientY;
-    topValue = todoEl.current.getBoundingClientRect().top + window.scrollY;
-    todoHeight = todoEl.current.getBoundingClientRect().height;
 
     setDragging(true);
     todoEl.current.classList.add('dragging');
@@ -57,19 +58,23 @@ const TodoItem = ({ todo }) => {
 
     const nextSibling = todoElements?.[currIndex + 1];
     const prevSibling = todoElements?.[currIndex - 1];
-    const sibling = newTopValue - topValue > 0 ? nextSibling : prevSibling;
+    const sibling = newTopValue - prevTopValue > 0 ? nextSibling : prevSibling;
     const siblingPosition = sibling === nextSibling ? 1 : -1;
+    prevTopValue = newTopValue;
+
     if (!sibling || !isCrossed(sibling, todoEl)) return;
 
     // If Items are crossed, then swap them;
-    swapItems(currIndex, currIndex + siblingPosition);
+    swapItems(sibling, placeholderEl.current, siblingPosition);
     todoElements[currIndex] = sibling;
     todoElements[currIndex + siblingPosition] = todoEl.current;
     currIndex += siblingPosition;
   }
 
   function handleDragEnd(e) {
+    todoElements.forEach(t => t.removeAttribute('style'));
     setDragging(false);
+    saveOrder(todo, currIndex);
     todoEl.current.classList.remove('dragging');
     document.removeEventListener('mousemove', handleDragOver);
     document.removeEventListener('mouseup', handleDragEnd);
@@ -78,7 +83,15 @@ const TodoItem = ({ todo }) => {
   function isCrossed(el, ref) {
     const y1 = el.getBoundingClientRect().y;
     const y2 = ref.current.getBoundingClientRect().y;
-    return Math.abs(Math.trunc(y1 - y2)) === Math.trunc(todoHeight / 2);
+    return Math.abs(Math.trunc(y1 - y2)) <= Math.trunc(todoHeight / 2);
+  }
+
+  function swapItems(el, placeholder, pos) {
+    const transValue = currIndex + pos - index;
+    el.style.transition = 'transform 0.3s ease-in-out';
+    placeholder.style.transform = `translateY(${100 * transValue}%)`;
+    el.style.transform = el.style.transform ? '' : `translateY(${-100 * pos}%)`;
+    setTimeout(() => (el.style.transition = 'none'), 300);
   }
 
   return (
@@ -103,15 +116,11 @@ const TodoItem = ({ todo }) => {
             </div>
           </div>
         </div>
-        <div className='todo-content-wrapper'>
-          <p className='todo-content' style={taskStyle}>
-            {todo.task}
-          </p>
-          <div
-            className='remove-todo'
-            onClick={() => handleDeleteTodo(todo.id)}>
-            <img src={cross} alt='remove' />
-          </div>
+        <p className='todo-content' style={taskStyle}>
+          {todo.task}
+        </p>
+        <div className='remove-todo' onClick={() => handleDeleteTodo(todo.id)}>
+          <img src={cross} alt='remove' />
         </div>
       </div>
     </>
