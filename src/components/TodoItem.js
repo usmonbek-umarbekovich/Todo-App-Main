@@ -71,7 +71,7 @@ const TodoItem = ({ todo, index }) => {
     currIndex += siblingPosition;
   }
 
-  function handleDragEnd(e) {
+  function handleDragEnd() {
     todoElements.forEach(t => t.removeAttribute('style'));
     setDragging(false);
     saveOrder(todo, currIndex);
@@ -89,8 +89,8 @@ const TodoItem = ({ todo, index }) => {
   function swapItems(el, placeholder, pos) {
     const transValue = currIndex + pos - index;
     el.style.transition = 'transform 0.3s ease-in-out';
-    placeholder.style.transform = `translateY(${100 * transValue}%)`;
     el.style.transform = el.style.transform ? '' : `translateY(${-100 * pos}%)`;
+    placeholder.style.transform = `translateY(${100 * transValue}%)`;
     setTimeout(() => (el.style.transition = 'none'), 300);
   }
 
