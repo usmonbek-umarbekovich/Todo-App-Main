@@ -114,6 +114,12 @@ h1 {
 }
 
 /* Media Queries */
+@media(max-width: 580px) {
+  .todo-list-container .todo-item.dragging {
+    width: calc(100vw - 1rem);
+  }
+}
+
 @media (max-width: 425px) {
   .main {
     background: none;
