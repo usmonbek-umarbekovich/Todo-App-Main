@@ -13,7 +13,7 @@ importAll(require.context('../images', false, /\.svg$/));
 export const TodoContext = React.createContext();
 
 function App() {
-  const [todos, setTodos] = useState(SAMPLE_DATA);
+  const [todos, setTodos] = useState([]);
   const [theme, setTheme] = useState('dark');
 
   const themeIcon = theme === 'dark' ? 'sun' : 'moon';
@@ -89,38 +89,5 @@ function App() {
     </div>
   );
 }
-
-const SAMPLE_DATA = [
-  {
-    id: 1,
-    completed: false,
-    task: 'Walk The Dog Today',
-  },
-  {
-    id: 2,
-    completed: true,
-    task: 'Jog around the park at 3pm',
-  },
-  {
-    id: 3,
-    completed: false,
-    task: 'Read books for 1 hour',
-  },
-  {
-    id: 4,
-    completed: true,
-    task: 'Read article for 1 hour',
-  },
-  {
-    id: 5,
-    completed: false,
-    task: 'Write code for 2 hours',
-  },
-  {
-    id: 6,
-    completed: true,
-    task: 'Sleep for 7 hours',
-  },
-];
 
 export default App;
