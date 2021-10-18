@@ -212,3 +212,32 @@ h1 {
     font-size: 0.85rem;
   }
 }
+
+@media (hover: none) and (max-width: 425px) {
+  .todo-options .clear-complete:hover {
+    color: var(--footer-color);
+  }
+}
+
+@media (hover: none) {
+  * {
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .todo-item .todo-complete:hover {
+    background: var(--circle-color);
+  }
+
+  .todo-options .clear-complete:hover {
+    color: var(--secondary-color);
+  }
+
+  .todo-options .clear-complete:active {
+    color: var(--main-text-color);
+  }
+
+  .todo-item .remove-todo {
+    opacity: 1;
+  }
+}

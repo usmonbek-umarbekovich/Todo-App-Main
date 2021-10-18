@@ -42,18 +42,23 @@ const TodoItem = ({ todo, index }) => {
     topValue = rect.top + window.scrollY;
     prevTopValue = topValue;
     todoHeight = rect.height;
-    yOffset = e.clientY;
+    yOffset = e?.clientY ?? e.touches[0].clientY;
 
     setDragging(true);
     todoEl.current.classList.add('dragging');
     todoEl.current.style.top = `${topValue}px`;
     document.addEventListener('mousemove', handleDragOver);
     document.addEventListener('mouseup', handleDragEnd);
+    document.addEventListener('touchmove', handleDragOver, { passive: false });
+    document.addEventListener('touchend', handleDragEnd);
   }
 
   function handleDragOver(e) {
-    e.preventDefault();
-    const newTopValue = topValue + e.clientY - yOffset;
+    if (e.cancelable) {
+      e.preventDefault();
+    }
+    const y = e?.clientY ?? e.touches[0].clientY;
+    const newTopValue = topValue + y - yOffset;
     todoEl.current.style.top = `${newTopValue}px`;
 
     const nextSibling = todoElements?.[currIndex + 1];
@@ -78,6 +83,8 @@ const TodoItem = ({ todo, index }) => {
     todoEl.current.classList.remove('dragging');
     document.removeEventListener('mousemove', handleDragOver);
     document.removeEventListener('mouseup', handleDragEnd);
+    document.removeEventListener('touchmove', handleDragOver);
+    document.removeEventListener('touchend', handleDragEnd);
   }
 
   function isCrossed(el, ref) {
@@ -103,7 +110,11 @@ const TodoItem = ({ todo, index }) => {
           style={{ height: todoEl.current?.getBoundingClientRect().height }}
         />
       )}
-      <div className='todo-item' ref={todoEl} onMouseDown={handleDragStart}>
+      <div
+        className='todo-item'
+        ref={todoEl}
+        onMouseDown={handleDragStart}
+        onTouchStart={handleDragStart}>
         <div className='todo-complete-wrapper'>
           <div className='todo-complete'>
             <input
