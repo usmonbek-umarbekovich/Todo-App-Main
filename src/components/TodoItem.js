@@ -119,20 +119,25 @@ const TodoItem = ({ todo, index }) => {
           <div className='todo-complete'>
             <input
               type='checkbox'
+              aria-label='Completed'
               checked={todo.completed}
               onChange={handleUpdate}
             />
-            <div className='input-wrapper'>
-              {todo.completed && <img src={check} alt='Completed' />}
+            <div className='input-outline'>
+              <div className='input-wrapper'>
+                {todo.completed && <img src={check} alt='Completed' />}
+              </div>
             </div>
           </div>
         </div>
         <p className='todo-content' style={taskStyle}>
           {todo.task}
         </p>
-        <div className='remove-todo' onClick={() => handleDeleteTodo(todo.id)}>
+        <button
+          className='remove-todo bg-clear'
+          onClick={() => handleDeleteTodo(todo.id)}>
           <img src={cross} alt='remove' />
-        </div>
+        </button>
       </div>
     </>
   );

@@ -65,7 +65,11 @@
   padding: 1.2rem 0;
 }
 
-.todo-item .todo-complete:hover {
+.todo-complete:hover .input-outline {
+  background: var(--check-background);
+}
+
+.todo-complete input:focus-visible + .input-outline {
   background: var(--check-background);
 }
 
@@ -81,9 +85,12 @@
 .todo-item .remove-todo {
   opacity: 0;
   cursor: pointer;
-  padding-left: 0.5rem;
+  padding: 0.5rem;
   margin-left: auto;
   transition: 0.3s ease-in;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .todo-item .todo-content {
@@ -119,20 +126,20 @@
   display: flex;
 }
 
-.todo-options p:not(.todo-info) {
+.filter-todos button {
   cursor: pointer;
-  transition: 0.3s ease-in-out;
+  transition: 0.1s ease-in-out;
 }
 
-.filter-todos p:not(:last-child) {
+.filter-todos button:not(:last-child) {
   margin-right: 1rem;
 }
 
-.filter-todos p.active-filter {
+.filter-todos button.active-filter {
   color: var(--primary-blue);
 }
 
 .todo-options .clear-complete:hover,
-.filter-todos p:not(.active-filter):hover {
+.filter-todos button:not(.active-filter):hover {
   color: var(--main-text-color);
 }

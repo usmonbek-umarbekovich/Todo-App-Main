@@ -20,10 +20,13 @@ const AddTodo = ({ handleAddTodo }) => {
   return (
     <form className='todo-form' onSubmit={handleSubmit}>
       <div className='todo-complete'>
-        <div className='input-wrapper'></div>
+        <div className='input-outline'>
+          <div className='input-wrapper'></div>
+        </div>
       </div>
       <input
         type='text'
+        aria-label='todo'
         placeholder='Create a new todo...'
         value={todoTask}
         onChange={e => setTodoTask(e.target.value)}

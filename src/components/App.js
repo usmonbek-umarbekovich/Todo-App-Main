@@ -72,9 +72,9 @@ function App() {
       <header className='header'>
         <div className='header__title'>
           <h1>Todo</h1>
-          <div className='toggle-theme' onClick={changeTheme}>
+          <button className='toggle-theme bg-clear' onClick={changeTheme}>
             <img src={icons[`icon-${themeIcon}.svg`]} alt='Theme Toggler' />
-          </div>
+          </button>
         </div>
         <AddTodo handleAddTodo={handleAddTodo} />
       </header>

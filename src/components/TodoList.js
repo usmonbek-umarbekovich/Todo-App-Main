@@ -40,25 +40,25 @@ const TodoList = ({ todos }) => {
           {countActive} item{countActive > 1 ? 's' : ''} left
         </p>
         <div className='filter-todos'>
-          <p
-            className={filterClass('all')}
+          <button
+            className={filterClass('all') + ' bg-clear'}
             onClick={() => setCurrentFilter('all')}>
             All
-          </p>
-          <p
-            className={filterClass('active')}
+          </button>
+          <button
+            className={filterClass('active') + ' bg-clear'}
             onClick={() => setCurrentFilter('active')}>
             Active
-          </p>
-          <p
-            className={filterClass('completed')}
+          </button>
+          <button
+            className={filterClass('completed') + ' bg-clear'}
             onClick={() => setCurrentFilter('completed')}>
             Completed
-          </p>
+          </button>
         </div>
-        <p className='clear-complete' onClick={handleClear}>
+        <button className='clear-complete bg-clear' onClick={handleClear}>
           Clear Completed
-        </p>
+        </button>
       </div>
     </>
   );
