@@ -92,6 +92,11 @@ h1 {
   cursor: pointer;
 }
 
+.bg-clear:focus {
+  opacity: 1;
+  visibility: visible;
+}
+
 .bg-clear:focus-visible {
   opacity: 1;
   visibility: visible;

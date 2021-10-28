@@ -69,6 +69,10 @@
   background: var(--check-background);
 }
 
+.todo-complete input:focus + .input-outline {
+  background: var(--check-background);
+}
+
 .todo-complete input:focus-visible + .input-outline {
   background: var(--check-background);
 }
